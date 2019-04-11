@@ -22,7 +22,7 @@ router.get('/proxy', async function(req, res, next) {
                 const $ = cheerio.load(html);
                 debugger;
                 // Get text
-                $("body").append("<script src='https://cdnjs.cloudflare.com/ajax/libs/highstock/6.0.3/adapters/standalone-framework.js'></script>");
+                $("body").append("<script > alert('This but better script is working')</script>");
                 console.log("------- with axios module -------")
                 console.log($.text());
                 // Get HTML
