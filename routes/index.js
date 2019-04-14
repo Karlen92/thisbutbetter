@@ -21,12 +21,12 @@ router.get('/proxy', async function(req, res, next) {
             if (response.status === 200) {
                 const html = response.data;
                 const $ = cheerio.load(html);
-                debugger;
                 // Get text
-                $("body").append("<link rel='stylesheet' href='https://drive.google.com/open?id=1AWAJazWE7-ojkFixmqfdyn9RMiUGhP15'></link>");
+                /////////////////////////////////// STYLES  //////////////////////////////////////////////
                 $("body").append("<style> .thisButBetterOutline {\n" +
                     "    outline: 2px dashed #658bff !important\n" +
                     "}</style>");
+                ////////////////////////////////////    JS    /////////////////////////////////////////////
                 $("body").append("<script type=\"text/javascript\" >var ThisButBetter = {};\n" +
                     "\n" +
                     "ThisButBetter.getElementPath = function(node){\n" +
@@ -75,8 +75,6 @@ router.get('/proxy', async function(req, res, next) {
                     "$(\"body *\").hover(ThisButBetter.hoverHandlerFactory({outline: 'thisButBetterOutline'}));\n" +
                     "\n" +
                     "$(\"body *\").click(ThisButBetter.clickHandlerFactory());\n</script>");
-                console.log("------- with axios module -------")
-                console.log($.text());
                 // Get HTML
                 //console.log($.html());
                 res.set('Content-Type', 'text/html');
