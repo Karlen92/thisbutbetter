@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+
+// https://drive.google.com/file/d/1AWAJazWE7-ojkFixmqfdyn9RMiUGhP15/view?usp=sharing
 
 module.exports = router;
