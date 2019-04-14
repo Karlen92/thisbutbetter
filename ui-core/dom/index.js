@@ -20,7 +20,7 @@ ThisButBetter.getElementPath = function(node){
 ThisButBetter.hoverHandlerFactory = function(params){
 
     return function(el){
-        const current = $('.betterBorder').removeClass(params.outline);
+        const current = $('.' + params.outline).removeClass(params.outline);
         $(el.target).addClass(params.outline);
     };
 };

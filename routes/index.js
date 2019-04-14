@@ -2,6 +2,7 @@ var express = require('express');
 const request = require("request");
 const axios = require('axios');
 const cheerio = require('cheerio');
+var proxy = require('express-http-proxy');
 const fs = require('fs');
 var router = express.Router();
 
@@ -26,7 +27,7 @@ router.get('/proxy', async function(req, res, next) {
                 $("body").append("<style> .thisButBetterOutline {\n" +
                     "    outline: 2px dashed #658bff !important\n" +
                     "}</style>");
-                $("body").append("<script type=\"text/javascript\" > var ThisButBetter = {};\n" +
+                $("body").append("<script type=\"text/javascript\" >var ThisButBetter = {};\n" +
                     "\n" +
                     "ThisButBetter.getElementPath = function(node){\n" +
                     "    const parts = [];\n" +
@@ -48,7 +49,7 @@ router.get('/proxy', async function(req, res, next) {
                     "ThisButBetter.hoverHandlerFactory = function(params){\n" +
                     "\n" +
                     "    return function(el){\n" +
-                    "        const current = $('.betterBorder').removeClass(params.outline);\n" +
+                    "        const current = $('.' + params.outline).removeClass(params.outline);\n" +
                     "        $(el.target).addClass(params.outline);\n" +
                     "    };\n" +
                     "};\n" +
@@ -73,7 +74,7 @@ router.get('/proxy', async function(req, res, next) {
                     "\n" +
                     "$(\"body *\").hover(ThisButBetter.hoverHandlerFactory({outline: 'thisButBetterOutline'}));\n" +
                     "\n" +
-                    "$(\"body *\").click(ThisButBetter.clickHandlerFactory());\n </script>");
+                    "$(\"body *\").click(ThisButBetter.clickHandlerFactory());\n</script>");
                 console.log("------- with axios module -------")
                 console.log($.text());
                 // Get HTML
@@ -87,5 +88,8 @@ router.get('/proxy', async function(req, res, next) {
     // https://www.reactgeeks.com/
 });
 
+router.get('/*',  proxy('https://www.reactgeeks.com'));
+
+router.post('/*',  proxy('https://www.reactgeeks.com'));
 
 module.exports = router;
